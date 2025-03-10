@@ -25,7 +25,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const TransactionsChart = () => {
   return (
-    <div className="bg-white text-black p-4 rounded-xl shadow-lg max-w-lg mx-auto">
+    <div className="bg-white text-black p-4 rounded-xl shadow-lg max-w-lg mx-auto w-full">
       <div className="flex justify-between">
         <h2 className="text-lg font-semibold">All Transactions</h2>
         <button className="bg-purple-200 text-purple-700 px-3 py-1 rounded-lg text-sm">View More</button>
