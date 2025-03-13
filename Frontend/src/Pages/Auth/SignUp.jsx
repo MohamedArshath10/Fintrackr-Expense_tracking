@@ -15,7 +15,31 @@ const SignUp = () => {
   const navigate = useNavigate()
 
   // Handle Sign up
-  const handleSignUp = async (e) => {}
+  const handleSignUp = async (e) => {
+    e.preventDefault()
+
+    let profileImageUrl = ""
+
+    if(!fullName){
+      setError("Please enter your name")
+      return
+    }
+
+    if(!validateEmail){
+      setError("Please enter a valid Email")
+      return
+    }
+
+    if(!password){
+      setError("Enter a valid Password")
+      return
+    }
+
+    setError("");
+
+    // Sign Up api call
+
+  }
 
   return (
     <AuthLayout>
@@ -51,6 +75,13 @@ const SignUp = () => {
               placeholder = "Min 8 characters"
               type = "password"
             />
+
+            {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
+
+            <button type='submit' className='btn-primary'>Sign in</button>
+
+            <p className='text-[13px] text-slate-800 nt-3'>Already have an account? {" "} <Link className= "font-medium text-primary underline" 
+            to="/login">Login</Link></p>
           </div>
           </div>
         </form>
