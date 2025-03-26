@@ -63,7 +63,7 @@ const SignUp = () => {
             value = {email}
             onChange = {({target}) => setEmail(target.value)}
             label = "Email Address"
-            placeholder = "arshath@gmail.com"
+            placeholder = "johndoe@gmail.com"
             type = "text"
           />
 
@@ -78,7 +78,7 @@ const SignUp = () => {
 
             {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-            <button type='submit' className='btn-primary'>Sign in</button>
+            <button type='submit' className='btn-primary'>Sign up</button>
 
             <p className='text-[13px] text-slate-800 nt-3'>Already have an account? {" "} <Link className= "font-medium text-primary underline" 
             to="/login">Login</Link></p>
