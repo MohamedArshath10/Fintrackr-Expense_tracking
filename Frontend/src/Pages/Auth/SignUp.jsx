@@ -31,7 +31,7 @@ const SignUp = () => {
       return
     }
 
-    if(!validateEmail){
+    if(!validateEmail(email)){
       setError("Please enter a valid Email")
       return
     }
@@ -55,7 +55,8 @@ const SignUp = () => {
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
-        password
+        password,
+        profileImageUrl
       })
 
       const {token, user} = response.data
@@ -90,7 +91,7 @@ const SignUp = () => {
               onChange={({target}) => setFullName(target.value)}
               label="Full name"
               placeholder="John"
-              type={Text}
+              type="text"
             />
 
           <Input 
