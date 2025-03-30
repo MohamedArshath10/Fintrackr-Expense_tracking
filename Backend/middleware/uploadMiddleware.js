@@ -7,14 +7,14 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()} - ${file.originalname}`)
+        cb(null, `${Date.now()}-${file.originalname}`)
     },
 })
 
 // File FIlters
 const fileFilter = (req, file, cb) => {
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png']
-    if(allowedTypes.includes(file.ninetype)){
+    if(allowedTypes.includes(file.mimetype)){
         cb(null, true)
     }
     else{

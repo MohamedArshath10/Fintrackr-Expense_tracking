@@ -9,7 +9,7 @@ const generateToken = (id) => {
 
 // Register user
 exports.registerUser = async (req, res) => {
-    const {fullName, email, password, profileImgUrl} = req.body
+    const {fullName, email, password, profileImageUrl} = req.body
     // validation
     if(!fullName || !email || !password){
         return res.status(400).json({message: "Please fill in all fields."})
@@ -26,7 +26,7 @@ exports.registerUser = async (req, res) => {
             fullName,
             email,
             password,
-            profileImgUrl
+            profileImageUrl
         })
         res.status(200).json({
             id: user._id,
@@ -69,7 +69,7 @@ exports.getUserInfo = async (req, res) => {
     try{
         const user = await User.findById(req.user.id).select("-password")
 
-        if(!User){
+        if(!user){
             return res.status(404).json({message: "User not found."})
         }
         res.status(200).json(user)
