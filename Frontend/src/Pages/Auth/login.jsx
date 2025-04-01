@@ -43,6 +43,7 @@ const Login = () => {
 
       if(token){
         localStorage.setItem("token", token)
+        localStorage.setItem("user", JSON.stringify(user)) // Store user data
         updateUser(user)
         navigate("/dashboard")
       }
