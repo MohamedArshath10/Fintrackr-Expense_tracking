@@ -6,6 +6,8 @@ import axiosInstance from '../../Utils/axiosInstance'
 import { API_PATHS } from '../../Utils/apiPaths'
 import {LuHandCoins, LuWalletMinimal} from 'react-icons/lu'
 import {IoMdCard} from 'react-icons/io'
+import { addThousandsSeperator } from '../../Utils/helper'
+import InfoCard from '../../Components/Cards/InfoCard'
 
 const Home = () => {
   useUserAuth()
@@ -51,6 +53,26 @@ const Home = () => {
             labels="Total Balance"
             value={addThousandsSeperator(dashboardData?.totalBalance || 0)}
             color="bg-primary"
+          />
+
+          <InfoCard
+            icons={<LuWalletMinimal />}
+            labels="Total Income"
+            value={addThousandsSeperator(dashboardData?.totalIncome || 0)}
+            color="bg-orange-500"
+          />
+
+          <InfoCard
+            icons={<LuHandCoins />}
+            labels="Total Expense"
+            value={addThousandsSeperator(dashboardData?.totalExpense || 0)}
+            color="bg-red-500"
+          />
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
+          <RecentTransactions
+            transactions = {dashboardData?.recentTransactions}
+            onSeeMore = {() => navigate("/expense")}
           />
         </div>
       </div>
