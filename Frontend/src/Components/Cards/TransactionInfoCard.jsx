@@ -14,13 +14,19 @@ const TransactionInfoCard = ({
         <div className='w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full'>
                 {icon ? (<img src={icon} alt={title} className='w-6 h-6' />) : (<LuUtensils />)}
         </div>
-        <div className=''>
+        <div className='flex-1 flex items-center justify-between'>
             <div>
-                <p className=''>{title}</p>
-                <p className=''>{date}</p>
+                <p className='text-sm text-gray-700 font-medium'>{title}</p>
+                <p className='text-xs text-gray-400 mt-1'>{date}</p>
             </div>
-            <div>
-                
+            <div className=''>
+                {!hideDeleteBtn && (
+                    <button className='' onClick={onDelete}> < LuTrash2 size={10}/> </button>
+                )}
+                <div className='flex items-center gap-2 px-3 py-1.5 rounded-md'>
+                    <h6 className=''> {type === 'income' ? "+" : "-"} ${amount}</h6>
+                    {type === "income" ? < LuTrendingUp /> : <LuTrendingDown />}
+                </div>
             </div>
         </div>
     </div>
