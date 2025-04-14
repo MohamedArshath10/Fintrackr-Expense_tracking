@@ -8,6 +8,7 @@ import {LuHandCoins, LuWalletMinimal} from 'react-icons/lu'
 import {IoMdCard} from 'react-icons/io'
 import { addThousandsSeperator } from '../../Utils/helper'
 import InfoCard from '../../Components/Cards/InfoCard'
+import RecentTransactions from '../../Components/Dashboard/RecentTransactions'
 
 const Home = () => {
   useUserAuth()
