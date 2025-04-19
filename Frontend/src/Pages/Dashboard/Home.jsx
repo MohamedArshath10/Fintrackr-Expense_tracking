@@ -9,6 +9,7 @@ import {IoMdCard} from 'react-icons/io'
 import { addThousandsSeperator } from '../../Utils/helper'
 import InfoCard from '../../Components/Cards/InfoCard'
 import RecentTransactions from '../../Components/Dashboard/RecentTransactions'
+import FinanceOverview from '../../Components/Dashboard/FinanceOverview'
 
 const Home = () => {
   useUserAuth()
@@ -42,9 +43,6 @@ const Home = () => {
     }, [])
   }
 
-  
-
-
   return (
     <DashboardLayout activeMenu="Dashboard" >
       <div className='my-5 mx-auto'>
@@ -74,6 +72,11 @@ const Home = () => {
           <RecentTransactions
             transactions = {dashboardData?.recentTransactions}
             onSeeMore = {() => navigate("/expense")}
+          />
+          <FinanceOverview 
+            totalBalance={dashboardData?.totalBalance || 0}
+            totalIncome={dashboardData?.totalIncome || 0}
+            totalExpense={dashboardData?.totalExpense || 0}
           />
         </div>
       </div>
