@@ -1,5 +1,7 @@
 import React from 'react'
 import {PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend} from 'recharts'
+import customTooltip from './customTooltip'
+import CustomLegend from './CustomLegend'
 
 const CustomPieChart = ({
     data,
@@ -25,6 +27,18 @@ const CustomPieChart = ({
                     <Cell key={`cell-${index}`} fill={colors[index % colors.length]}/>
                 ))}
             </Pie>
+            <Tooltip content={customTooltip}/>
+            <Legend content={CustomLegend}/>
+            {showTextAnchor && (
+                <>
+                    <text x="50%" y="50%" textAnchor="middle" fontSize="14px" dy={-25} fill='#666'>
+                        {label}
+                    </text>
+                    <text x="50%" y="50%" textAnchor="middle" fontSize="24px" dy={8} fill='#333' fontWeight="semi-bold">
+                        {totalAmount}
+                    </text>
+                </>
+            )}
         </PieChart>
     </ResponsiveContainer>
   )

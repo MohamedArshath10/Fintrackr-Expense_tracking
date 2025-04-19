@@ -1,24 +1,28 @@
-import React, { Children, act, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../../Context/useContext'
-import Navbar from './Navbar'
+import ResponsiveNavbarWithSidebar from './Navbar'
 import SideMenu from './SideMenu'
 
-const DashboardLayout = ({children, activeMenu}) => {
-    const {user} = useContext(UserContext)
-  return (
-    <div className=''>
-        <Navbar activeMenu={activeMenu}/>
+const DashboardLayout = ({ children, activeMenu }) => {
+  const { user } = useContext(UserContext)
 
-        {user && (
-            <div className='flex'>
-                <div className=''>
-                    <SideMenu activeMenu={activeMenu} />
-                </div>
-                <div className='grow mx-5'>
-                    {children}
-                </div>
-            </div>
-        )}
+  return (
+    <div className="">
+      <ResponsiveNavbarWithSidebar activeMenu={activeMenu} />
+
+      {user && (
+        <div className="flex">
+          {/* Show SideMenu only on large screens */}
+          <div className="hidden lg:block w-64">
+            <SideMenu activeMenu={activeMenu} />
+          </div>
+
+          {/* Main content */}
+          <div className="flex-grow mx-5">
+            {children}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
