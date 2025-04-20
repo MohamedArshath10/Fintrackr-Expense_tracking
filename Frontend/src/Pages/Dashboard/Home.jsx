@@ -12,6 +12,7 @@ import RecentTransactions from '../../Components/Dashboard/RecentTransactions'
 import FinanceOverview from '../../Components/Dashboard/FinanceOverview'
 import ExpenseTransactions from '../../Components/Dashboard/ExpenseTransactions'
 import Last30DaysExpenses from '../../Components/Dashboard/last30DaysExpenses'
+import RecentIncomeWithChart from '../../Components/Dashboard/RecentIncomeWithChart'
 
 const Home = () => {
   useUserAuth()
