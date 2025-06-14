@@ -6,10 +6,9 @@ const AddIncomeForm = ({onAddIncome}) => {
         source: "",
         amount: "",
         date: "",
-        date: "",
         icon: ""
     })
-    const handleChange = (key, value) => setIncome({...Income, [key]: value })
+    const handleChange = (key, value) => setIncome({...income, [key]: value })
   return (
     <div>
         <Input 

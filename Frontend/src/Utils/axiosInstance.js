@@ -14,16 +14,16 @@ const axiosInstance = axios.create({
 // ✅ Request Interceptor – Attach token
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('token'); // or sessionStorage
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// ✅ Response Interceptor – Graceful error handling
+// ✅ Response Interceptor – Error handling
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -31,13 +31,15 @@ axiosInstance.interceptors.response.use(
       const { status } = error.response;
 
       if (status === 401) {
-        // 401 Unauthorized: log and let the app handle the redirect
-        console.warn('Unauthorized request. Token may be expired or invalid.');
+        console.warn('⚠️ Unauthorized: Invalid or expired token.');
+        // Optionally redirect or clear storage here
       } else if (status === 500) {
-        console.error('Server error. Please try again later.');
+        console.error('🚨 Server error.');
       } else if (error.code === 'ECONNABORTED') {
-        console.error('Request timed out. Please try again later.');
+        console.error('⏳ Request timeout.');
       }
+    } else {
+      console.error('❌ Network error or no response from server.');
     }
 
     return Promise.reject(error);

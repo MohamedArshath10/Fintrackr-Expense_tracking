@@ -5,6 +5,7 @@ import axiosInstance from '../../Utils/axiosInstance'
 import { API_PATHS } from '../../Utils/apiPaths'
 import Modal from '../../Components/Modal'
 import AddIncomeForm from '../../Components/Income/AddIncomeForm'
+import toast from 'react-hot-toast'
 
 const Income = () => {
 
@@ -39,7 +40,39 @@ const Income = () => {
 
 
   // Handle Add Income
-  const handleAddIncome = async (income) => {}
+  const handleAddIncome = async (income) => {
+    const {source, amount, date} = income
+
+    // Validation check
+    if(!source.trim()) {
+      toast.error("Source is required.")
+      return
+    }
+
+    if(!amount || isNaN(amount) || Number(amount) <= 0){
+      toast.error("Amount should be valid")
+      return
+    }
+
+    if(!date){
+      toast.error("Date is required")
+      return
+    }
+
+    try{
+      await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
+        source,
+        amount: Number(amount),
+        date,
+      })
+
+      setOpenAddIncomeModal(false)
+      toast.success("Income added successfully.")
+      fetchIncomeDetails()
+    }catch(error){
+      console.error("Error adding income:", error.response?.data?.message || error.message)
+    }
+  }
 
 
   // Delete Income
