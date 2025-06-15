@@ -23,7 +23,7 @@ const IncomeOverview = ({transactions, onAddIncome}) => {
         </div>
         <button className='add-btn' onClick={onAddIncome}><LuPlus className='text-lg' />Add Income</button>
       </div>
-      <div className='mt-100'>
+      <div className='mt-30'>
         <CustomBarChart data={chartData}/>
       </div>
     </div>
