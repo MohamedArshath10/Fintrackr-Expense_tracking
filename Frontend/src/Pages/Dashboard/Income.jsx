@@ -8,9 +8,10 @@ import AddIncomeForm from '../../Components/Income/AddIncomeForm'
 import toast from 'react-hot-toast'
 import IncomeList from '../../Components/Income/IncomeList'
 import DeleteAlert from '../../Components/Layouts/DeleteAlert'
+import { useUserAuth } from '../../Hooks/useUserAuth'
 
 const Income = () => {
-
+  useUserAuth()
   const [incomeData, setIncomeData] = useState([])
   const [loading, setLoading] = useState(false)
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
@@ -78,7 +79,17 @@ const Income = () => {
 
 
   // Delete Income
-  const deleteIncome = async (id) => {}
+  const deleteIncome = async (id) => {
+    try{
+      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id))
+      setOpenDeleteAlert({show: false, data: null})
+      toast.success("Income deleted successfully")
+      fetchIncomeDetails()
+    }catch(error){
+      console.error("Error deleting the Income", error.response?.data?.message || error.message);
+      
+    }
+  }
 
 
   // handle Download income Details
