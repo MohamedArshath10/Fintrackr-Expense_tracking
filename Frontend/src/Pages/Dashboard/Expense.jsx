@@ -5,6 +5,8 @@ import { API_PATHS } from '../../Utils/apiPaths'
 import toast from 'react-hot-toast'
 import axiosInstance from '../../Utils/axiosInstance'
 import ExpenseOverview from '../../Components/Expense/ExpenseOverview'
+import Modal from '../../Components/Modal'
+import AddExpenseForm from '../../Components/Expense/AddExpenseForm'
 
 const Expense = () => {
   useUserAuth()
@@ -89,6 +91,13 @@ const Expense = () => {
             />
           </div>
         </div>
+        <Modal 
+          isOpen={openAddExpenseModal}
+          onClose={() => setOpenAddExpenseModal(false)}
+          title="Add Expense"
+        >
+            <AddExpenseForm onAddExpense={handleAddExpense} />
+        </Modal>
       </div>
     </DashboardLayout>
   )
