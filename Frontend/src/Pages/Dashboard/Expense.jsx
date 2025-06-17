@@ -8,6 +8,7 @@ import ExpenseOverview from '../../Components/Expense/ExpenseOverview'
 import Modal from '../../Components/Modal'
 import AddExpenseForm from '../../Components/Expense/AddExpenseForm'
 import ExpenseList from '../../Components/Expense/ExpenseList'
+import DeleteAlert from '../../Components/Layouts/DeleteAlert'
 
 const Expense = () => {
   useUserAuth()
@@ -89,10 +90,29 @@ const Expense = () => {
   }
 
   // handle Download expense Details
-  const handleDownloadExpenseDetails = async  () => {}
+  const handleDownloadExpenseDetails = async  () => {
+    try{
+      const response = await axiosInstance.get(
+        API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,{
+          responseType: "blob",
+        }
+      )
+
+      // Create a URL for the Blob
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement("a")
+      link.href = url
+      link.setAttribute("download", "expense_details.xlsx")
+      document.body.appendChild(link)
+      link.click()
+      link.parentNode.removeChild(link)
+      window.URL.revokeObjectURL(url)
+    }catch(error){
+      console.error("Error Downloading expense details", error);
+      toast.error("Failed to Download")
+    }
+  }
   
-
-
 
   useEffect(() => {
     fetchExpenseDetails()
@@ -129,11 +149,11 @@ const Expense = () => {
         <Modal 
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({show: false, data: null})}
-          title="Delete Income" 
+          title="Delete Expense" 
         >
           <DeleteAlert 
-            content=" Are you sure you want to delete this income?"
-            onDelete={() => deleteIncome(openDeleteAlert.data)}
+            content=" Are you sure you want to delete this expense?"
+            onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
 
         </Modal>
