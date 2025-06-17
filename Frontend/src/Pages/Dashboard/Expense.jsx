@@ -7,6 +7,7 @@ import axiosInstance from '../../Utils/axiosInstance'
 import ExpenseOverview from '../../Components/Expense/ExpenseOverview'
 import Modal from '../../Components/Modal'
 import AddExpenseForm from '../../Components/Expense/AddExpenseForm'
+import ExpenseList from '../../Components/Expense/ExpenseList'
 
 const Expense = () => {
   useUserAuth()
@@ -74,6 +75,25 @@ const Expense = () => {
     }
   }
 
+  // Delete Expense
+  const deleteExpense = async (id) => {
+    try{
+      await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id))
+      setOpenDeleteAlert({show: false, data: null})
+      toast.success("Expense deleted successfully")
+      fetchExpenseDetails()
+    }catch(error){
+      console.error("Error deleting the Expense", error.response?.data?.message || error.message);
+      
+    }
+  }
+
+  // handle Download expense Details
+  const handleDownloadExpenseDetails = async  () => {}
+  
+
+
+
   useEffect(() => {
     fetchExpenseDetails()
     return () => {}
@@ -90,6 +110,13 @@ const Expense = () => {
               onExpenseIncome={() => setOpenAddExpenseModal(true)}
             />
           </div>
+          <ExpenseList 
+            transactions={expenseData}
+            onDelete={(id) => {
+              setOpenDeleteAlert({show: true, data: id})
+            }}
+            onDownload={handleDownloadExpenseDetails}
+          />
         </div>
         <Modal 
           isOpen={openAddExpenseModal}
@@ -97,6 +124,18 @@ const Expense = () => {
           title="Add Expense"
         >
             <AddExpenseForm onAddExpense={handleAddExpense} />
+        </Modal>
+
+        <Modal 
+          isOpen={openDeleteAlert.show}
+          onClose={() => setOpenDeleteAlert({show: false, data: null})}
+          title="Delete Income" 
+        >
+          <DeleteAlert 
+            content=" Are you sure you want to delete this income?"
+            onDelete={() => deleteIncome(openDeleteAlert.data)}
+          />
+
         </Modal>
       </div>
     </DashboardLayout>
