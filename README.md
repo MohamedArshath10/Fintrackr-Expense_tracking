@@ -63,7 +63,7 @@
 
 ## 🏗️ Project Structure
 
-
+```
 Fintrackr/
 │
 ├── Backend/
@@ -112,6 +112,7 @@ Fintrackr/
         │   └── helper.js          # Chart data helper functions
         │
         └── App.jsx                # Routes and Root auth guard
+```
 ---
 
 ## 🔌 API Reference
