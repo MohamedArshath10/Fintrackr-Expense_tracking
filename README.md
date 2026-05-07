@@ -63,44 +63,55 @@
 
 ## 🏗️ Project Structure
 
+
 Fintrackr/
+│
 ├── Backend/
 │   ├── config/
 │   │   └── db.js                  # MongoDB connection
+│   │
 │   ├── controller/
 │   │   ├── authController.js      # Register, Login, GetUser
 │   │   ├── incomeController.js    # Add, Get, Delete, Download income
 │   │   ├── expenseController.js   # Add, Get, Delete, Download expense
 │   │   └── dashboardController.js # Aggregated dashboard data
+│   │
 │   ├── middleware/
 │   │   ├── authMiddleware.js      # JWT protect middleware
 │   │   └── uploadMiddleware.js    # Multer file upload config
+│   │
 │   ├── models/
 │   │   ├── User.js                # User schema with bcrypt hooks
 │   │   ├── Income.js              # Income schema
 │   │   └── Expense.js             # Expense schema
+│   │
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── incomeRoutes.js
 │   │   ├── expenseRoutes.js
 │   │   └── dashboardRoutes.js
+│   │
 │   ├── uploads/                   # Stored profile images
 │   └── server.js                  # Express app entry point
 │
 └── Frontend/
-└── src/
-├── Pages/
-│   ├── Auth/              # Login and SignUp pages
-│   └── Dashboard/         # Home, Income, Expense pages
-├── Components/
-│   └── Charts/            # CustomBarChart component
-├── Context/
-│   └── useContext.js      # UserContext and UserProvider
-├── Utils/
-│   ├── axiosInstance.js   # Axios config with interceptors
-│   ├── apiPaths.js        # Centralized API endpoints
-│   └── helper.js          # Chart data helper functions
-└── App.jsx                # Routes and Root auth guard
+    └── src/
+        ├── Pages/
+        │   ├── Auth/              # Login and SignUp pages
+        │   └── Dashboard/         # Home, Income, Expense pages
+        │
+        ├── Components/
+        │   └── Charts/            # CustomBarChart component
+        │
+        ├── Context/
+        │   └── useContext.js      # UserContext and UserProvider
+        │
+        ├── Utils/
+        │   ├── axiosInstance.js   # Axios config with interceptors
+        │   ├── apiPaths.js        # Centralized API endpoints
+        │   └── helper.js          # Chart data helper functions
+        │
+        └── App.jsx                # Routes and Root auth guard
 ---
 
 ## 🔌 API Reference
